@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แผนที่หลายจุดพร้อมคำอธิบาย</title>
+
+  <style>
+    html, body, gmp-map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+
+    .info-content {
+      max-width: 320px;
+      font-family: Arial, "Noto Sans Thai", sans-serif;
+      line-height: 1.5;
+    }
+
+    .info-content p {
+      margin: 0 0 10px;
+    }
+
+    .info-content a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+  </style>
+
+  <script>
+    (g => {
+      let h, a, k;
+      const p = "The Google Maps JavaScript API";
+      const c = "google";
+      const l = "importLibrary";
+      const q = "__ib__";
+      const m = document;
+      const b = window;
+
+      b[c] = b[c] || {};
+      const d = b[c].maps || (b[c].maps = {});
+      const r = new Set();
+      const e = new URLSearchParams();
+
+      const u = () => h || (h = new Promise(async (f, n) => {
+        a = m.createElement("script");
+        e.set("libraries", [...r] + "");
+
+        for (k in g) {
+          e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+        }
+
+        e.set("callback", c + ".maps." + q);
+        a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+        d[q] = f;
+        a.onerror = () => h = n(Error(p + " could not load."));
+        m.head.append(a);
+      }));
+
+      d[l] ? console.warn(p + " only loads once. Ignoring:", g) :
+        d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+    })({
+      key: "AIzaSyC5l0aPyGFqiqY5DpqOYf-8YhN_eYHHobU",
+      v: "weekly"
+    });
+  </script>
+</head>
+
+<body>
+  <gmp-map
+    center="6.934533,101.239911"
+    zoom="12"
+    map-id="DEMO_MAP_ID">
+  </gmp-map>
+
+  <script>
+    async function init() {
+      // โหลด Library ที่จำเป็น
+      const [{ InfoWindow }, { AdvancedMarkerElement }] = await Promise.all([
+        google.maps.importLibrary("maps"),
+        google.maps.importLibrary("marker")
+      ]);
+
+      // เรียกแผนที่
+      const mapElement = document.querySelector("gmp-map");
+      const map = mapElement.innerMap;
+
+      /*
+        เพิ่มจุดใหม่ได้ใน locations นี้
+        แต่ละจุดมี:
+        - name        = ชื่อสถานที่
+        - lat / lng   = พิกัด
+        - description = คำอธิบาย
+        - link        = ลิงก์รายละเอียดเพิ่มเติม
+      */
+      const locations = [
+        {
+          name: "เขากระโดง",
+          lat: 14.938620, 
+          lng: 103.093802,
+          description:
+            "ปากปล่องภูเขาไฟ เขากระโดง จ.บุรีรัมย์ วนอุทยานเขากระโดง",
+        },
+        {
+          name: "เขาพนมรุ้ง",
+          lat: 14.531845, 
+          lng: 102.940339,
+          description:
+            "อุทยานประวัติศาสตร์พนมรุ้ง ตำบลตาเป๊ก อำเภอเฉลิมพระเกียรติ จังหวัดบุรีรัมย์ ",
+        },
+        {
+          name: "เขาอังคาร",
+          lat: 14.534265, 
+          lng: 102.834373,
+          description:
+            "วัดเขาพระอังคาร ตำบลเจริญสุข อำเภอเฉลิมพระเกียรติ จังหวัดบุรีรัมย์",
+        },
+        {
+          name: "เขาคอก",
+          lat: 14.457846, 
+          lng: 103.039769,
+          description:
+            "เขาคอกอำเภอประโคนชัย จังหวัดบุรีรัมย์",
+        },
+        {
+          name: "เขาปลายบัด",
+          lat: 14.483452, 
+          lng: 102.957257,
+          description:
+            "ปราสาทเขาปลายบัด  ตำบลจรเข้มาก อำเภอประโคนชัย จังหวัดบุรีรัมย์",
+        },
+        {
+          name: "เขาหลบ",
+          lat: 14.488108, 
+          lng: 102.845347,
+          description:
+            "วัดเขาหลุบ อำเภอเฉลิมพระเกียรติ จังหวัดบุรีรัมย์",
+        },
+        {
+          name: "ภูเขาไฟดอยผาคอกหินฟู",
+          lat: 18.248896,  
+          lng: 99.625822, 
+          description:
+            "อำเภอแม่ทะ จังหวัดลำปาง",
+        },
+        {
+          name: "ดอยผาดอกจำปาแดด",
+          lat: 18.271151,  
+          lng: 99.627018,
+          description:
+            "วัดเขาหลุบ อำเภอเฉลิมพระเกียรติ จังหวัดบุรีรัมย์",
+        },
+        {
+          name: "เขาพลอยแหวน",
+          lat: 12.607273, 
+          lng:  102.038763,
+          description:
+            "จุดสำคัญ ที่ชัดเจนที่สุดในแถบภาคตะวันออก (จันทบุรี-ตราด) ที่มีหลักฐานทางธรณีวิทยาของหินภูเขาไฟ (หินบะซอลต์) และเป็นแหล่งกำเนิดพลอยโบราณ",
+        },
+        {
+          name: "กลุ่มภุเขาไฟจังหวัดสระบุรีและลพบุรี",
+          lat: 14.661801,  
+          lng: 100.807656,
+          description:
+            "พื้นที่อำเภอพระพุทธบาท จังหวัดสระบุรี และรอยต่อติดต่อกับ อำเภอพัฒนานิคม จังหวัดลพบุรี มักถูกเรียกรวมในทางธรณีวิทยาว่า กลุ่มหินบะซอลต์สระบุรี-ลพบุรี หรือบริเวณรอบๆ เนินเขาหินปูนและภูเขาไฟเก่าในเขต อ.พระพุทธบาท",
+        }
+      ];
+
+      const bounds = new google.maps.LatLngBounds();
+      const infoWindow = new InfoWindow();
+
+      // วนสร้าง Marker ให้ครบทุกจุดใน locations
+      locations.forEach((place) => {
+        const position = {
+          lat: place.lat,
+          lng: place.lng
+        };
+
+        // สร้าง Marker
+        const marker = new AdvancedMarkerElement({
+          map: map,
+          position: position,
+          title: place.name,
+          gmpClickable: true
+        });
+
+        // เก็บพิกัดเพื่อซูมให้เห็นทุก Marker
+        bounds.extend(position);
+
+        // เนื้อหาคำอธิบายในกล่อง Info Window
+        const content = document.createElement("div");
+        content.className = "info-content";
+
+        const description = document.createElement("p");
+        description.innerHTML = `<strong>${place.name}</strong><br>${place.description}`;
+
+        const coordinate = document.createElement("p");
+        coordinate.innerHTML = `<small>พิกัด: ${place.lat}, ${place.lng}</small>`;
+
+        const link = document.createElement("a");
+        link.href = place.link;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        
+
+        content.appendChild(description);
+        content.appendChild(coordinate);
+        content.appendChild(link);
+
+        // คลิก Marker เพื่อเปิดคำอธิบาย
+        marker.addEventListener("gmp-click", () => {
+          infoWindow.setContent(content);
+
+          infoWindow.open({
+            map: map,
+            anchor: marker
+          });
+        });
+      });
+
+      // ปรับแผนที่ให้เห็นทุกจุด
+      map.fitBounds(bounds, 60);
+    }
+
+    void init();
+  </script>
+</body>
+</html>
