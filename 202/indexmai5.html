@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ภูมิประเทศแบบคาสต์ จังหวัดกระบี่</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#0b2f33; --teal:#124f52; --emerald:#1a8f76; --jade:#2bbd97;
+    --sand:#e8d9b5; --cream:#f8f5ee; --ink:#16302f; --muted:#5d7573;
+    --line:#ddd4bd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Sarabun',sans-serif;color:var(--ink);background:var(--cream);line-height:1.8;overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.35;}
+
+  header.nav{position:fixed;top:0;left:0;width:100%;z-index:2000;background:rgba(11,47,51,.75);backdrop-filter:blur(12px);transition:.35s;border-bottom:1px solid rgba(232,217,181,.14);}
+  header.nav.solid{background:rgba(11,47,51,.97);box-shadow:0 6px 26px rgba(0,0,0,.28);}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;}
+  .brand .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,var(--emerald),var(--teal));display:grid;place-items:center;font-size:21px;box-shadow:0 4px 14px rgba(26,143,118,.45);}
+  .brand b{font-family:'Kanit';font-weight:600;font-size:1.02rem;}
+  .brand small{display:block;font-size:.68rem;color:var(--sand);letter-spacing:2px;}
+  .nav-links{display:flex;gap:3px;list-style:none;}
+  .nav-links a{color:#e4efe9;text-decoration:none;font-size:.88rem;padding:8px 12px;border-radius:30px;transition:.25s;white-space:nowrap;}
+  .nav-links a:hover{background:rgba(232,217,181,.18);color:#fff;}
+  .menu-btn{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;}
+
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:radial-gradient(circle at 50% 110%, rgba(43,189,151,.32), transparent 58%),
+    linear-gradient(180deg,#061f22 0%,#0b2f33 42%,#124f52 100%);
+    overflow:hidden;padding:130px 22px 90px;}
+  .glow{position:absolute;border-radius:50%;filter:blur(95px);}
+  .glow.a{width:430px;height:430px;background:#1a8f76;top:-130px;left:-130px;opacity:.5;}
+  .glow.b{width:360px;height:360px;background:#e8d9b5;bottom:-150px;right:-110px;opacity:.22;}
+  .hero-content{position:relative;z-index:3;max-width:880px;margin:0 auto;}
+  .hero .tag{display:inline-block;font-family:'Kanit';font-size:.82rem;letter-spacing:3px;color:var(--sand);border:1px solid rgba(232,217,181,.45);padding:7px 20px;border-radius:40px;margin-bottom:24px;}
+  .hero h1{font-size:clamp(2rem,5.4vw,3.9rem);font-weight:700;color:#fff;margin-bottom:16px;}
+  .hero h1 span{background:linear-gradient(120deg,#5fe0bd,#e8d9b5);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{color:#c6dad4;font-size:clamp(.98rem,2.1vw,1.15rem);max-width:680px;margin:0 auto 34px;}
+  .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{font-family:'Kanit';font-weight:500;font-size:.95rem;text-decoration:none;padding:13px 32px;border-radius:50px;transition:.3s;display:inline-flex;align-items:center;gap:8px;}
+  .btn.primary{background:linear-gradient(135deg,var(--emerald),var(--jade));color:#06231d;box-shadow:0 10px 30px rgba(26,143,118,.45);}
+  .btn.primary:hover{transform:translateY(-3px);}
+  .btn.ghost{border:1.5px solid rgba(232,217,181,.6);color:var(--sand);}
+  .btn.ghost:hover{background:rgba(232,217,181,.14);}
+  .cliffs{position:absolute;bottom:0;left:0;width:100%;height:210px;z-index:1;}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;color:var(--sand);font-size:.72rem;letter-spacing:2px;animation:bob 2s infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,10px);}}
+
+  section{padding:92px 22px;}
+  .wrap{max-width:1140px;margin:0 auto;}
+  .sec-head{text-align:center;margin-bottom:52px;}
+  .sec-head .kicker{font-family:'Kanit';font-weight:500;font-size:.8rem;letter-spacing:4px;color:var(--emerald);text-transform:uppercase;}
+  .sec-head h2{font-size:clamp(1.6rem,3.8vw,2.5rem);color:var(--deep);margin-top:10px;}
+  .sec-head .rule{width:70px;height:4px;border-radius:4px;margin:18px auto 0;background:linear-gradient(90deg,var(--emerald),var(--sand));}
+  .lead{max-width:840px;margin:20px auto 0;text-align:center;color:var(--muted);font-size:1.02rem;}
+
+  .cite{font-size:.72rem;color:var(--emerald);text-decoration:none;border-bottom:1px dotted var(--emerald);}
+  .cite:hover{color:var(--teal);}
+
+  #intro{background:var(--cream);}
+  .intro-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:50px;align-items:center;}
+  .intro-text p{margin-bottom:16px;color:#2f4a4a;}
+  .intro-text strong{color:var(--teal);font-weight:600;}
+  .intro-visual{position:relative;border-radius:24px;overflow:hidden;height:430px;box-shadow:0 24px 60px rgba(11,47,51,.28);background:#0b2f33;}
+  .ph-frame{position:absolute;inset:0;}
+  .ph-frame img.myimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .ph-frame::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 45%,rgba(6,31,34,.5));}
+  .dist .ph-frame img.myimg{transition:transform .5s;}
+  .dist:hover .ph-frame img.myimg{transform:scale(1.05);}
+
+  #distinct{background:#fff;}
+  .dist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:24px;}
+  .dist{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--cream);transition:.35s;display:flex;flex-direction:column;}
+  .dist:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(11,47,51,.16);border-color:#cfe3da;}
+  .dist .img{height:185px;position:relative;overflow:hidden;}
+  .dist .img .badge{position:absolute;top:10px;left:10px;z-index:4;background:rgba(11,47,51,.82);color:#d8efe7;font-size:.68rem;font-family:'Kanit';padding:4px 11px;border-radius:20px;}
+  .dist .body{padding:20px 22px 24px;flex:1;}
+  .dist h4{color:var(--deep);font-size:1.08rem;margin-bottom:7px;}
+  .dist p{font-size:.9rem;color:var(--muted);}
+
+  #map-section{background:var(--cream);}
+  .map-shell{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 16px 46px rgba(11,47,51,.18);border:1px solid var(--line);}
+  #map{width:100%;height:640px;background:#d7e5e2;}
+  .map-overlay{position:absolute;top:16px;left:16px;z-index:10;width:300px;max-height:calc(100% - 32px);
+    background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-radius:16px;
+    box-shadow:0 12px 34px rgba(11,47,51,.24);overflow:hidden;display:flex;flex-direction:column;}
+  .map-overlay header{padding:13px 16px 11px;background:linear-gradient(135deg,var(--deep),var(--teal));color:#fff;}
+  .map-overlay header h3{font-size:.98rem;}
+  .map-overlay header span{font-size:.72rem;color:#a9ccc5;}
+  .spot-scroll{overflow-y:auto;padding:8px;}
+  .spot{display:flex;gap:11px;padding:10px 11px;border-radius:12px;cursor:pointer;transition:.22s;align-items:flex-start;}
+  .spot:hover{background:#eef7f3;}
+  .spot.active{background:linear-gradient(120deg,#e2f3ec,#f5fbf9);box-shadow:inset 0 0 0 1.5px var(--emerald);}
+  .spot .pin{flex:none;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--emerald),var(--teal));color:#fff;font-family:'Kanit';font-size:.78rem;font-weight:600;}
+  .spot .txt b{font-family:'Kanit';font-weight:500;font-size:.88rem;color:var(--deep);display:block;line-height:1.35;}
+  .spot .txt span{font-size:.74rem;color:var(--muted);}
+  .toggle-ov{position:absolute;top:16px;left:16px;z-index:11;display:none;background:rgba(11,47,51,.9);color:#fff;border:none;border-radius:12px;padding:9px 14px;font-family:'Kanit';font-size:.85rem;cursor:pointer;}
+  .map-legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px;}
+  .legend-chip{font-size:.76rem;background:#fff;border:1px solid var(--line);border-radius:30px;padding:6px 14px;color:var(--muted);}
+  .legend-chip.warn{border-color:#e8b84b;color:#8a6a12;background:#fdf6e3;}
+
+  .iw{width:290px;font-family:'Sarabun';}
+  .iw .iw-imgwrap{position:relative;width:100%;height:150px;border-radius:12px;overflow:hidden;
+    background:#dcefe9;margin-bottom:10px;}
+  .iw .iw-imgwrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .iw h3{font-family:'Kanit';font-size:1.02rem;color:var(--deep);margin-bottom:6px;line-height:1.35;}
+  .iw .iw-type{display:inline-block;font-family:'Kanit';font-size:.68rem;letter-spacing:.5px;background:#e2f3ec;color:var(--emerald);border-radius:20px;padding:2px 10px;margin-bottom:8px;}
+  .iw p{font-size:.82rem;color:#3f5759;line-height:1.65;margin-bottom:10px;}
+  .iw .iw-links{display:flex;flex-direction:column;gap:7px;}
+  .iw a.iw-btn{display:flex;align-items:center;gap:7px;text-decoration:none;font-family:'Kanit';font-size:.8rem;padding:8px 12px;border-radius:10px;transition:.22s;line-height:1.3;}
+  .iw a.iw-btn.map{background:linear-gradient(135deg,var(--emerald),var(--jade));color:#06231d;font-weight:500;}
+  .iw a.iw-btn.map:hover{filter:brightness(1.08);}
+
+  #refs{background:#fff;}
+  .ref-list{display:grid;gap:12px;max-width:940px;margin:0 auto;}
+  .ref{display:flex;gap:14px;padding:18px 20px;background:var(--cream);border:1px solid var(--line);border-radius:14px;transition:.25s;}
+  .ref:hover{border-color:var(--emerald);box-shadow:0 8px 24px rgba(11,47,51,.09);}
+  .ref .n{flex:none;width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--emerald),var(--teal));color:#fff;display:grid;place-items:center;font-family:'Kanit';font-size:.82rem;}
+  .ref .c b{font-family:'Kanit';font-weight:500;font-size:.95rem;color:var(--deep);display:block;}
+  .ref .c p{font-size:.85rem;color:var(--muted);margin:2px 0 4px;}
+  .ref .c a{font-size:.78rem;color:var(--emerald);word-break:break-all;}
+  .note{max-width:940px;margin:24px auto 0;background:#eef7f3;border-left:4px solid var(--emerald);border-radius:0 12px 12px 0;padding:16px 20px;font-size:.88rem;color:#33504f;}
+
+  #bottom{
+    background:#0e1a2b;
+    border-top:1px solid rgba(45,212,191,.12);
+    padding:72px 22px 82px;
+  }
+  .bottom-grid{
+    max-width:1000px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start;
+  }
+  .b-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .b-ico{
+    width:37px;height:37px;border-radius:11px;display:grid;place-items:center;
+    background:rgba(45,212,191,.13);border:1px solid rgba(45,212,191,.32);
+    color:#2dd4bf;font-size:17px;
+  }
+  .b-head h3{font-size:1.25rem;font-family:'Kanit';font-weight:600;letter-spacing:.3px;}
+  .b-head.toc h3{color:#fff;}
+  .b-head.author h3{color:#2dd4bf;}
+
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .toc-list a{
+    display:flex;align-items:center;gap:12px;text-decoration:none;
+    padding:9px 6px;border-radius:10px;transition:.25s;
+  }
+  .toc-list .chev{color:#2dd4bf;font-size:1.15rem;font-weight:700;line-height:1;flex:none;transition:transform .25s;}
+  .toc-list .txt{color:#2dd4bf;font-size:1rem;transition:.25s;}
+  .toc-list a:hover{background:rgba(45,212,191,.07);padding-left:12px;}
+  .toc-list a:hover .chev{transform:translateX(3px);}
+  .toc-list a:hover .txt{color:#5eead4;}
+
+  .author-box{
+    background:rgba(45,212,191,.06);
+    border:1px solid rgba(45,212,191,.22);
+    border-radius:16px;padding:26px 28px;
+  }
+  .author-box .row{
+    display:flex;flex-wrap:wrap;gap:8px;padding:11px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .author-box .row:last-child{border-bottom:none;}
+  .author-box .lbl{
+    color:#2dd4bf;font-family:'Kanit';font-weight:500;font-size:.96rem;
+    flex:none;min-width:168px;
+  }
+  .author-box .val{color:#e8eef5;font-size:.97rem;}
+
+  footer{background:#04181a;color:#8aada6;padding:40px 22px 34px;text-align:center;border-top:3px solid var(--emerald);}
+  footer .fbrand{font-family:'Kanit';color:#fff;font-size:1.15rem;margin-bottom:8px;}
+  footer p{font-size:.84rem;max-width:660px;margin:0 auto 6px;}
+  footer .small{font-size:.74rem;color:#587b76;margin-top:14px;}
+
+  @media(max-width:960px){.intro-grid{grid-template-columns:1fr;}}
+  @media(max-width:880px){.bottom-grid{grid-template-columns:1fr;gap:46px;}}
+  @media(max-width:760px){
+    .nav-links{position:absolute;top:100%;left:0;width:100%;flex-direction:column;background:rgba(11,47,51,.99);padding:14px;gap:3px;display:none;}
+    .nav-links.open{display:flex;}
+    .menu-btn{display:block;}
+    section{padding:66px 18px;}
+    .map-overlay{display:none;}
+    .map-overlay.open{display:flex;width:calc(100% - 32px);}
+    .toggle-ov{display:block;}
+    #map{height:470px;}
+    .iw{width:240px;}
+    .iw .iw-imgwrap{height:120px;}
+    .author-box{padding:22px 20px;}
+    .author-box .lbl{min-width:130px;font-size:.9rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <div class="logo">⛰</div>
+      <div><b>คาสต์ จังหวัดกระบี่</b><small>KRABI · ANDAMAN</small></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#intro">รู้จักกระบี่</a></li>
+      <li><a href="#distinct">ลักษณะเด่น</a></li>
+      <li><a href="#map-section">แผนที่</a></li>
+      <li><a href="#refs">แหล่งอ้างอิง</a></li>
+      <li><a href="#bottom">สารบัญ/ผู้จัดทำ</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="hero-content">
+    <span class="tag">GEOGRAPHY · KRABI · THAILAND</span>
+    <h1>ภูมิประเทศแบบ <span>คาสต์</span><br>จังหวัดกระบี่</h1>
+    <p>ดินแดนชายฝั่ง "จมตัว" แห่งทะเลอันดามัน ที่ซ่อนถ้ำหินปูน ภาพเขียนยุคก่อนประวัติศาสตร์
+       และแอ่งน้ำสีมรกตไว้อย่างน่าค้นหา</p>
+    <div class="btn-row">
+      <a href="#intro" class="btn primary">เริ่มต้นเรียนรู้ →</a>
+      <a href="#map-section" class="btn ghost">📍 เปิดแผนที่</a>
+    </div>
+  </div>
+  <svg class="cliffs" viewBox="0 0 1440 210" preserveAspectRatio="none">
+    <path fill="#061f22" d="M0,210 L0,118 Q120,40 260,108 T520,88 T780,128 T1040,68 T1280,118 T1440,88 L1440,210 Z"/>
+    <path fill="#08262a" opacity=".75" d="M0,210 L0,158 Q180,108 340,158 T680,148 T980,168 T1240,138 T1440,163 L1440,210 Z"/>
+  </svg>
+  <div class="scroll-hint">เลื่อนลง ↓</div>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">รู้จักกระบี่ · Introduction</div>
+      <h2>ภูมิประเทศแบบคาสต์ กับจังหวัดกระบี่</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <p><strong>ภูมิประเทศแบบคาสต์ (Karst Topography)</strong> คือภูมิประเทศที่พบในบริเวณที่มี
+        <strong>หินปูน ยิปซัม หรือหินที่ละลายน้ำได้</strong> ส่วนใหญ่ประกอบด้วยหินผุ หลุมยุบ (doline)
+        ธารน้ำใต้ดิน และถ้ำ
+        <a class="cite" href="http://oss101.ldd.go.th/soillegendV2/soillegend/soilmaplegend.html" target="_blank" rel="noopener">[กองสำรวจดิน]</a></p>
+        <p>ภาคใต้ของไทยมีลักษณะเด่นเป็น <strong>"คาสต์หอคอย" (Tower Karst)</strong>
+        ซึ่งเป็นหอคอยหินปูนที่มีด้านข้างสูงชันเกือบตั้งฉากหรือยื่นล้ำ (overhanging)
+        เกิดจากการกัดกร่อนของน้ำบริเวณฐานหอคอย ควบคู่กับการยกตัวของเปลือกโลก
+        <a class="cite" href="https://www.showcaves.com/english/explain/Karst/TowerKarst.html" target="_blank" rel="noopener">[showcaves.com]</a>
+        <a class="cite" href="https://www.siue.edu/GEOGRAPHY/ONLINE/Gillespie.htm" target="_blank" rel="noopener">[SIUE]</a></p>
+        <p>หินปูนในคาบสมุทรไทยเป็นส่วนหนึ่งของ <strong>กลุ่มหินราชบุรี (Ratburi Group)</strong>
+        ที่สะสมตัวในยุค<strong>เพอร์เมียน เมื่อประมาณ 286–245 ล้านปีก่อน</strong>
+        มีสีเทาอ่อนและมีซากฟอสซิล เมื่อโผล่พ้นน้ำจะกลายเป็นสันเขาและหอคอยหินปูนที่โดดเด่น
+        <a class="cite" href="https://www.siue.edu/GEOGRAPHY/ONLINE/Gillespie.htm" target="_blank" rel="noopener">[SIUE]</a></p>
+        <p><strong>จังหวัดกระบี่</strong> ตั้งอยู่บน<strong>ฝั่งทะเลอันดามัน ตอนบนของภาคใต้</strong>
+        มีพื้นที่ทั้งหมดราว <strong>4,708 ตร.กม.</strong> แบ่งการปกครองเป็น <strong>8 อำเภอ</strong>
+        โดยมีพื้นที่ส่วนใหญ่เป็น<strong>ภูเขาหินปูนและป่าดิบชื้น</strong> ที่มีความสำคัญทางธรณีวิทยาอย่างยิ่ง
+        <a class="cite" href="https://th.wikipedia.org/wiki/จังหวัดกระบี่" target="_blank" rel="noopener">[วิกิพีเดีย]</a></p>
+        <p>จุดเด่นทางภูมิศาสตร์ของกระบี่คือเป็นจังหวัดที่มี <strong>ภูมิประเทศคาสต์หอคอยที่สมบูรณ์ที่สุดแห่งหนึ่งของประเทศไทย</strong>
+        ไม่ว่าจะเป็นเขาพนมเบญจา ถ้ำผีหัวโต ถ้ำผ้าม่าน ธารโบกขรณี ไปจนถึงหาดทรายรายเลย์
+        ที่ล้วนเกิดจากหินปูนยุคเพอร์เมียนก้อนเดียวกัน
+        <a class="cite" href="https://podcast.thaipbs.or.th/podcast/1story1picture/41" target="_blank" rel="noopener">[Thai PBS]</a></p>
+      </div>
+      <div class="intro-visual">
+        <div class="ph-frame">
+          <!-- ★ จุดใส่รูปที่ 1 : ภาพรวมภูมิประเทศคาสต์ของจังหวัดกระบี่ ★ -->
+          <img class="myimg" src="./images/aowluk1.jpg" alt="ภูมิประเทศคาสต์ จังหวัดกระบี่">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISTINCT -->
+<section id="distinct">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">ลักษณะเด่น · Distinctive Features</div>
+      <h2>ลักษณะเด่นของภูมิประเทศคาสต์ในจังหวัดกระบี่</h2>
+      <div class="rule"></div>
+      <p class="lead">จุดเด่นทางภูมิศาสตร์และธรณีวิทยาที่ทำให้กระบี่เป็นแหล่งคาสต์ชั้นนำของประเทศไทย</p>
+    </div>
+    <div class="dist-grid">
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">ชายฝั่งจมตัว</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 2 : ชายฝั่งจมตัว ★ -->
+            <img class="myimg" src="./images/aowluk.jpg" alt="ชายฝั่งจมตัว จังหวัดกระบี่">
+          </div>
+        </div>
+        <div class="body">
+          <h4>🌊 ชายฝั่งแบบจมตัว (Submerged Shoreline)</h4>
+          <p>ชายฝั่งทะเลอันดามันของกระบี่เป็นชายฝั่งประเภทจมตัว ทำให้มีหาดทรายน้อยและไหล่ทวีปลาดชัน
+             เกิดอ่าวเว้าลึกและเกาะหินปูนกระจายตามชายฝั่งจำนวนมาก
+             <a class="cite" href="https://podcast.thaipbs.or.th/podcast/1story1picture/41" target="_blank" rel="noopener">[Thai PBS]</a></p>
+        </div>
+      </div>
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">ถ้ำยุคก่อนประวัติศาสตร์</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 3 : ถ้ำผีหัวโต ★ -->
+            <img class="myimg" src="./images/phi-hua-to.jpg" alt="ถ้ำผีหัวโต">
+          </div>
+        </div>
+        <div class="body">
+          <h4>🖌️ ถ้ำผีหัวโตและภาพเขียนโบราณ</h4>
+          <p>ถ้ำผีหัวโตในอำเภออ่าวลึก มีภาพเขียนสียุคก่อนประวัติศาสตร์กว่า 100 ภาพ
+             เป็นหลักฐานสำคัญของมนุษย์ยุคหินในภาคใต้
+             <a class="cite" href="http://research.ku.ac.th/forest/Project.aspx?BudgetYear=2024&ProjectNumber=2430394000" target="_blank" rel="noopener">[ม.เกษตรศาสตร์]</a></p>
+        </div>
+      </div>
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">แอ่งน้ำสีมรกต</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 4 : ธารโบกขรณี ★ -->
+            <img class="myimg" src="./images/tharn-boke-kra-noni.jpg" alt="อุทยานแห่งชาติธารโบกขรณี">
+          </div>
+        </div>
+        <div class="body">
+          <h4>💎 ธารโบกขรณี — แอ่งน้ำสีมรกต</h4>
+          <p>แอ่งน้ำสีมรกตท่ามกลางหุบเขาหินปูนและป่าดิบชื้น
+             ในเขตอุทยานแห่งชาติธารโบกขรณี เกิดจากธารน้ำใต้ดินในพื้นที่คาสต์
+             <a class="cite" href="https://podcast.thaipbs.or.th/podcast/1story1picture/41" target="_blank" rel="noopener">[Thai PBS]</a></p>
+        </div>
+      </div>
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">คาสต์หอคอย</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 5 : คาสต์หอคอย ★ -->
+            <img class="myimg" src="./images/railay.jpg" alt="คาสต์หอคอย จังหวัดกระบี่">
+          </div>
+        </div>
+        <div class="body">
+          <h4>⛰️ หอคอยหินปูน (Tower Karst)</h4>
+          <p>ภูเขาหินปูนโดดสูงชันที่โผล่จากที่ราบ ทะเล และหาดทราย อย่างไร่เลย์และเกาะพีพี
+             เป็นคาสต์หอคอยที่สมบูรณ์แบบที่สุดแห่งหนึ่งของโลก
+             <a class="cite" href="https://www.showcaves.com/english/explain/Karst/TowerKarst.html" target="_blank" rel="noopener">[showcaves.com]</a></p>
+        </div>
+      </div>
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">ถ้ำหินงอกหินย้อย</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 6 : ถ้ำผ้าม่าน ★ -->
+            <img class="myimg" src="./images/pa-maan-cave.jpg" alt="ถ้ำผ้าม่าน">
+          </div>
+        </div>
+        <div class="body">
+          <h4>🕳️ ถ้ำผ้าม่าน (Pa Maan Cave)</h4>
+          <p>โถงถ้ำหินปูนที่มีหินงอกหินย้อยสะสมตัวเป็นผ้าม่านงดงาม
+             อีกทั้งยังมีถ้ำเสือ ถ้ำสร้อยเสียง กระจายทั่วพื้นที่จังหวัด
+             <a class="cite" href="http://www.aoluek.go.th/travel/" target="_blank" rel="noopener">[ที่ว่าการอำเภออ่าวลึก]</a></p>
+        </div>
+      </div>
+
+      <div class="dist">
+        <div class="img">
+          <span class="badge">ระบบนิเวศสามน้ำ</span>
+          <div class="ph-frame">
+            <!-- ★ จุดใส่รูปที่ 7 : คลองท่าปอม ★ -->
+            <img class="myimg" src="./images/thapom.jpg" alt="คลองท่าปอม">
+          </div>
+        </div>
+        <div class="body">
+          <h4>🌿 "คลองสองน้ำ สามป่า"</h4>
+          <p>คลองท่าปอมในอำเภออ่าวลึก รวมระบบนิเวศน้ำจืด น้ำกร่อย น้ำเค็ม
+             ป่าพรุ ป่าชายเลน และป่าดิบชื้นไว้ในพื้นที่เดียว
+             <a class="cite" href="https://podcast.thaipbs.or.th/podcast/1story1picture/41" target="_blank" rel="noopener">[Thai PBS]</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">แผนที่ · Interactive Map</div>
+      <h2>แผนที่แหล่งภูมิประเทศคาสต์ในจังหวัดกระบี่</h2>
+      <div class="rule"></div>
+      <p class="lead">คลิกที่ Marker หรือรายชื่อด้านซ้าย เพื่อดู <b>รูปภาพและคำอธิบาย</b> ของแต่ละแห่ง</p>
+    </div>
+    <div class="map-shell">
+      <button class="toggle-ov" id="toggleOv">📋 รายชื่อจุด</button>
+      <div class="map-overlay" id="mapOverlay">
+        <header>
+          <h3>📍 แหล่งคาสต์ 9 แห่ง</h3>
+          <span>จังหวัดกระบี่</span>
+        </header>
+        <div class="spot-scroll" id="spotScroll"></div>
+      </div>
+      <div id="map"></div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">แหล่งอ้างอิง · References</div>
+      <h2>แหล่งข้อมูลที่ใช้ในเว็บไซต์นี้</h2>
+      <div class="rule"></div>
+      <p class="lead">ข้อมูลทั้งหมดคัดกรองจากหน่วยงานราชการ สื่อสารคดี และแหล่งวิชาการ เพื่อความน่าเชื่อถือ</p>
+    </div>
+    <div class="ref-list">
+      <div class="ref"><div class="n">1</div><div class="c">
+        <b>ที่ว่าการอำเภออ่าวลึก — ข้อมูลการท่องเที่ยว</b>
+        <p>ข้อมูลแหล่งท่องเที่ยวในอำเภออ่าวลึก : ถ้ำผ้าม่าน หาดอ่าวชิ้งชั้ง ตุคนทราย อ่าวเหนา เขาเหล็กโคน</p>
+        <a href="http://www.aoluek.go.th/travel/" target="_blank" rel="noopener">http://www.aoluek.go.th/travel/</a>
+      </div></div>
+      <div class="ref"><div class="n">2</div><div class="c">
+        <b>Thai PBS Podcast — กระบี่บนทางสามแพร่ง</b>
+        <p>สารคดีเรื่องกระบี่/อ่าวลึก : ชายฝั่งจมตัว (Submerged Shoreline) ถ้ำผีหัวโต และธารโบกขรณี</p>
+        <a href="https://podcast.thaipbs.or.th/podcast/1story1picture/41" target="_blank" rel="noopener">podcast.thaipbs.or.th</a>
+      </div></div>
+      <div class="ref"><div class="n">3</div><div class="c">
+        <b>กองสำรวจดินและวิจัยทรัพยากรดิน — กรมพัฒนาที่ดิน</b>
+        <p>นิยามภูมิประเทศแบบคาสต์ : หินปูน/ยิปซัมที่ละลายน้ำได้ ประกอบด้วยหลุมยุบ (doline) ธารน้ำใต้ดิน และถ้ำ</p>
+        <a href="http://oss101.ldd.go.th/soillegendV2/soillegend/soilmaplegend.html" target="_blank" rel="noopener">oss101.ldd.go.th</a>
+      </div></div>
+      <div class="ref"><div class="n">4</div><div class="c">
+        <b>Southern Illinois University Edwardsville (SIUE) — Tower Karst of Peninsular Thailand</b>
+        <p>ข้อมูลกลุ่มหินราชบุรี (Ratburi Group) ยุคเพอร์เมียน 286–245 ล้านปี และการเกิดคาสต์หอคอยในคาบสมุทรไทย</p>
+        <a href="https://www.siue.edu/GEOGRAPHY/ONLINE/Gillespie.htm" target="_blank" rel="noopener">siue.edu</a>
+      </div></div>
+      <div class="ref"><div class="n">5</div><div class="c">
+        <b>ShowCaves — Tower Karst</b>
+        <p>อธิบายการเกิดคาสต์หอคอย (Tower Karst) ที่เกิดจากการกัดกร่อนฐานหอคอยและการยกตัวของเปลือกโลก</p>
+        <a href="https://www.showcaves.com/english/explain/Karst/TowerKarst.html" target="_blank" rel="noopener">showcaves.com</a>
+      </div></div>
+      <div class="ref"><div class="n">6</div><div class="c">
+        <b>มหาวิทยาลัยเกษตรศาสตร์ — โครงการวิจัยธรณีสัณฐานและภาพเขียนสี อ่าวลึก</b>
+        <p>การศึกษาสภาพธรณีสัณฐานและภาพเขียนสี อ่าวลึก จังหวัดกระบี่ เพื่ออธิบายการย้ายถิ่นฐานของมนุษย์ยุคก่อนประวัติศาสตร์</p>
+        <a href="http://research.ku.ac.th/forest/Project.aspx?BudgetYear=2024&ProjectNumber=2430394000" target="_blank" rel="noopener">research.ku.ac.th</a>
+      </div></div>
+      <div class="ref"><div class="n">7</div><div class="c">
+        <b>วิกิพีเดีย — จังหวัดกระบี่</b>
+        <p>ข้อมูลเขตการปกครอง 8 อำเภอ พื้นที่ 4,708 ตร.กม. และลักษณะภูมิประเทศของจังหวัดกระบี่</p>
+        <a href="https://th.wikipedia.org/wiki/จังหวัดกระบี่" target="_blank" rel="noopener">th.wikipedia.org</a>
+      </div></div>
+    </div>
+    <div class="note">
+      <b>หมายเหตุเรื่องภาพและลิงก์:</b> รูปภาพและลิงก์ในป๊อปอัปแผนที่กำหนดเองในอาเรย์
+      <b>locations</b> (ฟิลด์ <b>img</b>, <b>linkText</b> และ <b>link</b>) ในส่วนสคริปต์ด้านล่าง
+      — ใส่ชื่อไฟล์รูปและลิงก์ที่ต้องการได้ทันที
+    </div>
+  </div>
+</section>
+
+<!-- ===== ส่วนท้าย: สารบัญเนื้อเรียน + ผู้จัดทำ ===== -->
+<section id="bottom">
+  <div class="bottom-grid">
+
+    <div>
+      <div class="b-head toc">
+        <div class="b-ico">📋</div>
+        <h3>สารบัญเนื้อเรียน</h3>
+      </div>
+      <ul class="toc-list">
+        <li><a href="#intro"><span class="chev">›</span><span class="txt">1. ความหมายของคาสต์</span></a></li>
+        <li><a href="#distinct"><span class="chev">›</span><span class="txt">2. ลักษณะเด่นของกระบี่</span></a></li>
+        <li><a href="#map-section"><span class="chev">›</span><span class="txt">3. แผนที่ Google Maps</span></a></li>
+        <li><a href="#refs"><span class="chev">›</span><span class="txt">4. แหล่งอ้างอิง</span></a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="b-head author">
+        <div class="b-ico">👤</div>
+        <h3>ผู้จัดทำ</h3>
+      </div>
+      <div class="author-box">
+        <div class="row">
+          <span class="lbl">ชื่อ-นามสกุล:</span>
+          <span class="val">นางสาวไหมสุรี บินและ</span>
+        </div>
+        <div class="row">
+          <span class="lbl">ระดับชั้น/รหัสนักศึกษา:</span>
+          <span class="val">ชั้นปีที่ 2 / 6820210579</span>
+        </div>
+        <div class="row">
+          <span class="lbl">สถานศึกษา:</span>
+          <span class="val">มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตปัตตานี สาขาภูมิศาสตร์</span>
+        </div>
+        <div class="row">
+          <span class="lbl">เสนอ:</span>
+          <span class="val">ผศ.ดร.วุฒิพงษ์ แสงมณี</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">⛰ ภูมิประเทศแบบคาสต์ · จังหวัดกระบี่</div>
+  <p>เว็บไซต์เพื่อการศึกษา เรื่อง ภูมิประเทศแบบคาสต์ (Karst Topography) จังหวัดกระบี่</p>
+  <p>ข้อมูลอ้างอิงจาก ที่ว่าการอำเภออ่าวลึก · Thai PBS · กรมพัฒนาที่ดิน · งานวิจัยทางวิชาการ</p>
+  <div class="small">© 2026 Krabi Karst Project · แผนที่โดย Google Maps</div>
+</footer>
+
+<script>
+/* ---------- NAV ---------- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 60));
+const menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ---------- DATA: แหล่งคาสต์ 10 จุดในจังหวัดกระบี่ ----------
+   ★ img      = รูปในป๊อปอัป (ใส่เอง เช่น "./images/railay.jpg")
+   ★ linkText = ข้อความบนปุ่ม
+   ★ link     = ลิงก์ปุ่ม (เว้นว่าง "" = ไม่แสดงปุ่ม)
+------------------------------------------------ */
+const locations = [
+  { name:"เขาพนมเบญจา (Khao Phanom Bencha)", type:"ภูเขาหินปูน/แกนคาสต์ของจังหวัด", lat:8.3480, lng:98.7500,
+    desc:"ยอดดอยหินปูนสูงสุดของจังหวัดกระบี่ (1,397 ม.) ในเขตอุทยานแห่งชาติเขาพนมเบญจา ต้นกำเนิดของถ้ำและธารน้ำใต้ดินหลายแห่ง เป็นแกนสำคัญของภูมิประเทศคาสต์ของทั้งจังหวัด",
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://portal.dnp.go.th/Content/nationalpark?contentId=924" },
+  { name:"ถ้ำผีหัวโต (Phi Hua To Cave)", type:"ถ้ำหินปูน/ภาพเขียนโบราณ", lat:8.2380, lng:98.7120,
+    desc:"ถ้ำหินปูนขนาดใหญ่ในเขตอุทยานแห่งชาติเขาพนมเบญจา อำเภออ่าวลึก มีภาพเขียนสียุคก่อนประวัติศาสตร์กว่า 100 ภาพ หลักฐานสำคัญของมนุษย์ยุคหินในภาคใต้",
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://www.thailandtourismdirectory.go.th/attraction/99174" },
+  { name:"ถ้ำผ้าม่าน (Pa Maan Cave)", type:"ถ้ำหินปูน/หินย้อย", lat:8.3520, lng:98.7020,
+    desc:"ถ้ำในเขตอุทยานแห่งชาติเขาพนมเบญจา มีหินงอกหินย้อยสะสมตัวเป็นผ้าม่านงดงาม ตัวอย่างการเกิดถ้ำในหินปูนที่ชัดเจน",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://www.thailandtourismdirectory.go.th/attraction/4584" },
+  { name:"ธารโบกขรณี (Tharn Boke Kra Noni)", type:"แอ่งน้ำในภูมิประเทศคาสต์", lat:8.3160, lng:98.7680,
+    desc:"แอ่งน้ำสีมรกตในหุบเขาหินปูน ในเขตอุทยานแห่งชาติธารโบกขรณี อำเภออ่าวลึก เกิดจากธารน้ำใต้ดินในพื้นที่คาสต์ ท่ามกลางป่าดิบชื้น",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://thai.tourismthailand.org/Attraction/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4%E0%B8%98%E0%B8%B2%E0%B8%A3%E0%B9%82%E0%B8%9A%E0%B8%81%E0%B8%82%E0%B8%A3%E0%B8%93%E0%B8%B5" },
+  { name:"คลองท่าปอม (Khlong Tha Pom)", type:"คลองในพื้นที่หินปูน", lat:8.3020, lng:98.7420,
+    desc:"คลองน้ำจืดที่ไหลผ่านพื้นที่หินปูน 'คลองสองน้ำ สามป่า' ระบบนิเวศน้ำจืด น้ำกร่อย และป่าชายเลนในอำเภออ่าวลึก",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://thai.tourismthailand.org/Attraction/%E0%B8%97%E0%B9%88%E0%B8%B2%E0%B8%9B%E0%B8%AD%E0%B8%A1-%E0%B8%84%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%AD%E0%B8%87%E0%B8%99%E0%B9%89%E0%B8%B3" },
+  { name:"หาดทรายไร่เลย์ (Railay Beach)", type:"คาสต์หอคอยชายฝั่ง", lat:8.0106, lng:98.8370,
+    desc:"คาบสมุทรหินปูนที่โผล่จากทะเล มีหน้าผาหินปูนตั้งฉากสูงหลายร้อยเมตร สถานที่ปีนผาชื่อดังระดับโลก ตัวอย่างคาสต์หอคอยชายฝั่งที่สวยงามที่สุดของไทย",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://www.krabipao.go.th/travel_top/detail/37/data.html" },
+  { name:"ถ้ำพระนาง (Phra Nang Cave)", type:"ถ้ำหินปูนชายฝั่ง", lat:8.0028, lng:98.8403,
+    desc:"ถ้ำในหน้าผาหินปูนริมหาดพระนาง อำเภอเมืองกระบี่ เกิดจากการกัดเซาะของคลื่นน้ำทะเลในหินปูน เป็นสัญลักษณ์ทางธรรมชาติที่โด่งดังของกระบี่",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://thai.tourismthailand.org/Attraction/%E0%B8%AB%E0%B8%B2%E0%B8%94%E0%B8%96%E0%B9%89%E0%B8%B3%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%99%E0%B8%B2%E0%B8%87" },
+  { name:"เขาขานับนาม (Khao Khanap Nam)", type:"คาสต์หอคอยปากแม่น้ำ", lat:8.0540, lng:98.8850,
+    desc:"ภูเขาหินปูนคู่กลางปากแม่น้ำกระบี่ สัญลักษณ์ของจังหวัด ในหน้าผามีถ้ำหินปูนที่เกิดจากการละลายของน้ำ เป็นคาสต์หอคอยที่โดดเด่นริมน้ำ",    
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://thai.tourismthailand.org/Attraction/%E0%B9%80%E0%B8%82%E0%B8%B2%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%9A%E0%B8%99%E0%B9%89%E0%B8%B3" },
+  { name:"เกาะพีพีดอน (Koh Phi Phi Don)", type:"เกาะหินปูน/คาสต์ทะเล", lat:7.7364, lng:98.7753,
+    desc:"หมู่เกาะหินปูนกลางทะเลอันดามัน อำเภอเมืองกระบี่ เกิดจากหอคอยหินปูนยุคเพอร์เมียนที่โผล่พ้นน้ำทะเล ภูมิประเทศคาสต์ที่สมบูรณ์ที่สุดแห่งหนึ่งของโลก",   
+    linkText:"ดูข้อมูลเพิ่มเติม", link:"https://thai.tourismthailand.org/Attraction/%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%9E%E0%B8%B5%E0%B8%9E%E0%B8%B5" }
+];
+/* ---------- OVERLAY LIST ---------- */
+const spotScroll = document.getElementById('spotScroll');
+locations.forEach((loc, i) => {
+  const el = document.createElement('div');
+  el.className = 'spot';
+  el.dataset.idx = i;
+  el.innerHTML = `<div class="pin">${i+1}</div>
+    <div class="txt"><b>${loc.name}</b><span>${loc.type}</span></div>`;
+  el.addEventListener('click', () => focusSpot(i));
+  spotScroll.appendChild(el);
+});
+
+document.getElementById('toggleOv').addEventListener('click', () => {
+  document.getElementById('mapOverlay').classList.toggle('open');
+});
+
+/* ---------- MAP ---------- */
+let map, markers = [], infoWindow;
+
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:{ lat:8.05, lng:98.80 },
+    zoom:10,
+    mapTypeId:'hybrid',
+    mapTypeControl:true,
+    streetViewControl:false,
+    fullscreenControl:true,
+    zoomControl:true
+  });
+
+  infoWindow = new google.maps.InfoWindow();
+
+  locations.forEach((loc, i) => {
+    const marker = new google.maps.Marker({
+      position:{ lat:loc.lat, lng:loc.lng },
+      map:map,
+      title:loc.name,
+      label:{ text:String(i+1), color:'#ffffff', fontWeight:'600', fontSize:'12px' },
+      icon:{
+        path: google.maps.SymbolPath.CIRCLE,
+        scale:15, fillColor:'#1a8f76', fillOpacity:1,
+        strokeColor:'#e8d9b5', strokeWeight:2.5
+      },
+      animation: google.maps.Animation.DROP
+    });
+    marker.addListener('click', () => { openInfo(i, marker); highlight(i); });
+    markers.push(marker);
+  });
+}
+
+function openInfo(i, marker){
+  const loc = locations[i];
+
+  /* รูปในป๊อปอัป — มาจากฟิลด์ img ที่กำหนดเอง */
+  const imgBlock = loc.img
+    ? `<div class="iw-imgwrap"><img src="${loc.img}" alt="${loc.name}"></div>`
+    : '';
+
+  /* ปุ่มลิงก์ — แสดงเฉพาะเมื่อใส่ link ไว้ */
+  const linkBlock = loc.link
+    ? `<a class="iw-btn map" href="${loc.link}" target="_blank" rel="noopener">
+         <span class="ico">🔗</span> ${loc.linkText || 'ดูข้อมูลเพิ่มเติม'}
+       </a>`
+    : '';
+
+  infoWindow.setContent(`
+    <div class="iw">
+      ${imgBlock}
+      <h3>${i+1}. ${loc.name}</h3>
+      <span class="iw-type">${loc.type}</span>
+      <p>${loc.desc}</p>
+      <div class="iw-links">${linkBlock}</div>
+    </div>`);
+
+  infoWindow.open(map, marker);
+}
+
+function focusSpot(i){
+  const loc = locations[i];
+  map.panTo({ lat:loc.lat, lng:loc.lng });
+  map.setZoom(13);
+  openInfo(i, markers[i]);
+  highlight(i);
+  if (window.innerWidth <= 760) document.getElementById('mapOverlay').classList.remove('open');
+}
+
+function highlight(i){
+  document.querySelectorAll('.spot').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.spot[data-idx="${i}"]`);
+  if (el) el.classList.add('active');
+}
+
+window.initMap = initMap;
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5l0aPyGFqiqY5DpqOYf-8YhN_eYHHobU&callback=initMap&language=th&region=TH">
+</script>
+</body>
+</html>
